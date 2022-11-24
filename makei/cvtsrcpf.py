@@ -90,11 +90,15 @@ class CvtSrcPf():
             for row in results[0]:
                 mbr_name = row[0].strip()
                 mbr_type = row[1].strip()
-                src_mbrs.append((mbr_name, mbr_type))
+                # need to map member type to file extension
+                file_ext = _map_mbr_type_to_file_ext(mbr_type)
+                src_mbrs.append((mbr_name, file_ext))
             return src_mbrs
         else:
             return []
 
+def _map_mbr_type_to_file_ext(mbr_type) -> str:
+    return mbr_type
 
 def _get_attr(filepath: str):
     import os
